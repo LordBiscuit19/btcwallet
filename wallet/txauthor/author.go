@@ -9,6 +9,7 @@ import (
 	"errors"
 
 	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcd/wire"
 	"github.com/btcsuite/btcutil"
@@ -142,7 +143,8 @@ func NewUnsignedTransaction(outputs []*wire.TxOut, relayFeePerKb btcutil.Amount,
 				return nil, errors.New("fee estimation requires change " +
 					"scripts no larger than P2WPKH output scripts")
 			}
-			change := wire.NewTxOut(int64(changeAmount), changeScript)
+			hashPtr, _ := chainhash.NewHashFromStr("0000000000000000000000000000000000000000000000000000000000000000")
+			change := wire.NewTxOut(uint8(0), int64(changeAmount), *hashPtr ,changeScript)
 			l := len(outputs)
 			unsignedTransaction.TxOut = append(outputs[:l:l], change)
 			changeIndex = l

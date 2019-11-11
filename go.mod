@@ -1,7 +1,6 @@
 module github.com/btcsuite/btcwallet
 
 require (
-	github.com/LordBiscuit19/btcd v0.20.1-beta
 	github.com/btcsuite/btcd v0.20.0-beta
 	github.com/btcsuite/btclog v0.0.0-20170628155309-84c8d2346e9f
 	github.com/btcsuite/btcutil v0.0.0-20190425235716-9e5f4b9a998d
@@ -31,6 +30,6 @@ replace github.com/btcsuite/btcwallet/wallet/txauthor => ./wallet/txauthor
 
 replace github.com/btcsuite/btcwallet/wallet/txrules => ./wallet/txrules
 
-replace github.com/btcsuite/btcwallet/wallet/txsizes => ./wallet/txsizes
+replace github.com/btcsuite/btcd => ../btcd
 
 go 1.13

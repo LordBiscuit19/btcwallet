@@ -15,13 +15,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/LordBiscuit19/btcd/btcec"
-	"github.com/LordBiscuit19/btcd/btcjson"
-	"github.com/LordBiscuit19/btcd/chaincfg"
-	"github.com/LordBiscuit19/btcd/chaincfg/chainhash"
-	"github.com/LordBiscuit19/btcd/rpcclient"
-	"github.com/LordBiscuit19/btcd/txscript"
-	"github.com/LordBiscuit19/btcd/wire"
+	"github.com/btcsuite/btcd/btcec"
+	"github.com/btcsuite/btcd/btcjson"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
+	"github.com/btcsuite/btcd/rpcclient"
+	"github.com/btcsuite/btcd/txscript"
+	"github.com/btcsuite/btcd/wire"
 	"github.com/btcsuite/btcutil"
 	"github.com/btcsuite/btcwallet/chain"
 	"github.com/btcsuite/btcwallet/waddrmgr"
@@ -1362,8 +1362,8 @@ func makeOutputs(pairs map[string]btcutil.Amount, chainParams *chaincfg.Params) 
 		if err != nil {
 			return nil, fmt.Errorf("cannot create txout script: %s", err)
 		}
-
-		outputs = append(outputs, wire.NewTxOut(int64(amt), pkScript))
+		hashPtr, _ := chainhash.NewHashFromStr("0000000000000000000000000000000000000000000000000000000000000000")
+		outputs = append(outputs, wire.NewTxOut(uint8(0), int64(amt), *hashPtr, pkScript))
 	}
 	return outputs, nil
 }
