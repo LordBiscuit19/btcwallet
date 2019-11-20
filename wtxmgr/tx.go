@@ -126,6 +126,8 @@ type Credit struct {
 	wire.OutPoint
 	BlockMeta
 	Amount       btcutil.Amount
+	AssetHash    string
+	TxType       uint8
 	PkScript     []byte
 	Received     time.Time
 	FromCoinBase bool
@@ -746,6 +748,8 @@ func (s *Store) UnspentOutputs(ns walletdb.ReadBucket) ([]Credit, error) {
 				Time:  blockTime,
 			},
 			Amount:       btcutil.Amount(txOut.Value),
+			AssetHash:    txOut.Asset.String(),
+			TxType:       txOut.Type,
 			PkScript:     txOut.PkScript,
 			Received:     rec.Received,
 			FromCoinBase: blockchain.IsCoinBaseTx(&rec.MsgTx),
